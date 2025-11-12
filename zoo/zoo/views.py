@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 def display_landing(request):
     return render(request, 'landing.html')
@@ -133,5 +134,108 @@ def display_zebra(request):
     return render(request, 'animals.html', context=zebra)
 def display_python(request):
     return render(request, 'animals.html', context=python)
+def display_data(request):
+    animals=[
+    {
+    'name': 'Tiger',
+    'age': 5,
+    'description': 'The tiger is the largest cat species, known for its orange coat with black stripes. It is a powerful predator and an apex carnivore.',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg",
+    'habitat': "Tropical rainforests, grasslands, and mangrove swamps",
+    'diet': "Deer, wild boar, and other large mammals",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+
+{
+    'name': 'Monkey',
+    'age': 15,
+    'description': 'Monkeys are intelligent primates known for their agility, curiosity, and social behavior. They live in large groups called troops.',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/6/6f/Rhesus_macaque_in_Sundarbans.jpg",
+    'habitat': "Tropical forests, woodlands, and savannas",
+    'diet': "Fruits, leaves, nuts, insects, and small animals",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+
+{
+    'name': 'Elephant',
+    'age': 20,
+    'description': 'Elephants are the largest land mammals on Earth, known for their intelligence, strong social bonds, and long trunks.',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg",
+    'habitat': "Grasslands, forests, and savannas",
+    'diet': "Grass, leaves, fruits, and bark",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+
+{
+    'name': 'Lion',
+    'age': 15,
+    'description': 'The lion is a large carnivorous cat native to Africa and parts of India, known as the "king of the jungle".',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg",
+    'habitat': "Grasslands, savannas, and open woodlands",
+    'diet': "Deer, antelope, zebra, and buffalo",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+
+{
+    'name': 'Giraffe',
+    'age': 12,
+    'description': 'The giraffe is the tallest land animal, easily recognized by its long neck and spotted coat.',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg",
+    'habitat': "Savannas, grasslands, and open woodlands",
+    'diet': "Leaves, flowers, and fruits from tall trees like acacia",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+
+{
+    'name': 'Ostrich',
+    'age': 8,
+    'description': 'The ostrich is the largest and heaviest living bird, native to Africa, and known for its powerful running ability.',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/d/d3/Common_ostrich_struthio_camelus.jpg",
+    'habitat': "Savannas and desert regions",
+    'diet': "Seeds, roots, leaves, and insects",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+
+{
+    'name': 'Peacock',
+    'age': 10,
+    'description': 'The peacock is famous for its vibrant tail feathers and beautiful display used to attract mates.',
+    'image': "https://upload.wikimedia.org/wikipedia/commons/3/3a/Indian_Peacock.jpg",
+    'habitat': "Forests and farmlands",
+    'diet': "Seeds, insects, and small reptiles",
+    'donated_by': "WCS",
+    'caretaker': "Mr. Arjun Kumar"
+},
+]
+    return JsonResponse({'status':200,'data':animals})
+
+def login(request):
+    email_value=request.GET.get('email')
+    password_value=request.GET.get('password')
+
+    print(email_value)
+    print(password_value)
+    request.session['email'] = email_value
+    request.session['password'] = password_value
+    return JsonResponse({'email':email_value,'password':password_value})
+
+def compare(request):
+    email_value =request.session.get('email')
+    password_value =request.session.get('password')
+
+    correct_email="admin@gmail.com"
+    correct_password="1234"
+
+    if email_value==correct_email and password_value==correct_password:
+        return  JsonResponse({'message': "login verified successfully!"})
+    else:
+        return JsonResponse({'message':'Login failed'})
+
 
 
