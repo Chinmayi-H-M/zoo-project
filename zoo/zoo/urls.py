@@ -31,4 +31,9 @@ urlpatterns = [
     path('cheetah/',views.display_cheetah, name='cheetah'),
     path('zebra/',views.display_zebra, name='zebra'),
     path('python/',views.display_python, name='python'),
+    path('animals',views.display_data,name='data'),
+    path('login/',views.login,name='email'),
+    #path('zoo/info',views.zoo_info,name='zoo_info'),
+    path('compare/',views.compare,name='compare'),
+
 ]
