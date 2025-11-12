@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiger-information</title>
+    <style>
+        body{
+            text-align:center;
+            background-color:blanchedalmond;
+        }
+        img{
+            width:50%;
+            height:500px;
+            margin:30px 30px 0px 30px;
+            border:2px solid black;
+        }
+        .Description{
+            text-align:left;
+            background-color:azure;
+            padding:5px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="{{ image }}" alt="">
+        <h1>{{ name }}</h1>
+    </div>
+    <div class="Description">
+    <h3>More information about the animal tiger:</h3>
+    <p><b>Description:</b><i>{{ description }}</i></p>
+    <p><b>Age:</b><i> {{ age }}</i></p>
+    <p><b>Habitat:</b><i> {{ habitat }}</i></p>
+    <p><b>Diet:</b><i> {{ diet }}</i></p>
+    <p><b>Donated by:</b><i>{{ donated_by }}</i></p>
+    <p><b>Caretaker:</b><i>{{ caretaker }}</i></p>
+    {% if donated_by == "WCS" %}
+        <button>Donate Now</button>
+    {% else %}
+        <p>Not available for donation</p>
+    {% endif %}
+    </div>
+    
+</body>
+</html>
